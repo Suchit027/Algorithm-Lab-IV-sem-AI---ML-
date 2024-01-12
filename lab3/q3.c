@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
-void partition(int *arr, int n)
+void partition1(int *arr, int n)
 {
     int sum = 0;
     for (int i = 0; i < n; ++i)
@@ -41,6 +41,47 @@ void partition(int *arr, int n)
         printf("it does not exists\n");
     }
 }
+int part_until(int *arr, int n, int index, int target)
+{
+    if (index == n || target < 0)
+    {
+        return 0;
+    }
+    if (target == 0)
+    {
+        return 1;
+    }
+    if (part_until(arr, n, index + 1, target - arr[index]))
+    {
+        return 1;
+    }
+    else if (part_until(arr, n, index + 1, target))
+    {
+        return 1;
+    }
+    else
+    {
+        return 0;
+    }
+}
+int can_part(int *arr, int n)
+{
+    if (n <= 1)
+    {
+        return 0;
+    }
+    int sum = 0;
+    for (int i = 0; i < n; ++i)
+    {
+        sum += arr[i];
+    }
+    if (sum % 2 != 0)
+    {
+        return 0;
+    }
+    int target = sum / 2;
+    return part_until(arr, n, 0, target);
+}
 void main()
 {
     printf("enter array size\n");
@@ -52,5 +93,13 @@ void main()
     {
         scanf("%d", &arr[i]);
     }
-    partition(arr, n);
+    // partition1(arr, n);
+    if (can_part(arr, n))
+    {
+        printf("yes\n");
+    }
+    else
+    {
+        printf("no\n");
+    }
 }
