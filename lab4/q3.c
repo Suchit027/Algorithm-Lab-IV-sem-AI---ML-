@@ -26,7 +26,7 @@ void enqueue(ql queue, int ver)
     {
         queue = queue->link;
     }
-    queue->link = ob->link;
+    queue->link = ob;
     ob->link = NULL;
 }
 int dequeue(ql queue)
