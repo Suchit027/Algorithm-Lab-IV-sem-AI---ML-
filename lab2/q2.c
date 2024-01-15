@@ -25,6 +25,7 @@ int power(int a, int b)
     }
     return ans;
 }
+// counts no. of times a prime no. is a factor of that no.
 int count(int prime, int num)
 {
     int ans = 0;
