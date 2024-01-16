@@ -44,7 +44,18 @@ int gcd(int a, int b)
     {
         if (a_arr[i] == 0 && a % i == 0 && b % i == 0)
         {
-            ans *= power(i, count(i, a));
+            int prime_count_a = count(i, a);
+            int prime_count_b = count(i, b);
+            int c;
+            if (prime_count_a >= prime_count_b)
+            {
+                c = prime_count_b;
+            }
+            else
+            {
+                c = prime_count_a;
+            }
+            ans *= power(i, c);
         }
     }
     return ans;
@@ -54,7 +65,5 @@ void main()
     printf("enter a and b\n");
     int a, b;
     scanf("%d %d", &a, &b);
-    int x = a > b ? b : a;
-    int y = a > b ? a : b;
-    printf("%d", gcd(x, y));
+    printf("%d", gcd(a, b));
 }
