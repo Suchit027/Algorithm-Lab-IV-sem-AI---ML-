@@ -1,24 +1,18 @@
 #include <stdio.h>
-void match(char *str1, char *str2)
+int match(char *str1, char *str2)
 {
-    int check = 1;
-    int i, j;
-    for (i = 0, j = 0; str1[i] != '\0' && str2[j] != '\0'; ++i, ++j)
+    for (int i = 0; str1[i] != '\0' && str2[i] != '\0'; ++i)
     {
-        if (str1[i] != str2[j])
+        if (str1[i] > str2[i])
         {
-            check = 0;
-            break;
+            return 1;
+        }
+        else if (str1[i] < str2[i])
+        {
+            return -1;
         }
     }
-    if (i != j || check == 0)
-    {
-        printf("not equal\n");
-    }
-    else
-    {
-        printf("equal\n");
-    }
+    return 0;
 }
 void main()
 {
