@@ -1,23 +1,32 @@
 #include <stdio.h>
-int match(char *str1, char *str2)
+// baisically substring finding
+int match(char *str1, int n1, char *str2, int n2)
 {
-    for (int i = 0; str1[i] != '\0' && str2[i] != '\0'; ++i)
+    for (int i = 0; i < n1 - n2 + 1; ++i)
     {
-        if (str1[i] > str2[i])
+        int j = i;
+        int k = 0;
+        for (; k < n2; ++j, ++k)
         {
-            return 1;
+            if (str1[j] != str2[k])
+            {
+                break;
+            }
         }
-        else if (str1[i] < str2[i])
+        if (k == n2)
         {
-            return -1;
+            return i;
         }
     }
-    return 0;
+    return -1;
 }
 void main()
 {
-    printf("enter strings\n");
     char str1[20], str2[20];
-    scanf("%s %s", str1, str2);
-    match(str1, str2);
+    int n1, n2;
+    printf("enter string1 and length\n");
+    scanf("%s %d", str1, &n1);
+    printf("enter string2 and length\n");
+    scanf("%s %d", str2, &n2);
+    printf("%d", match(str1, n1, str2, n2));
 }
