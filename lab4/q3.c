@@ -91,7 +91,7 @@ void main()
             al ob = (al)malloc(sizeof(struct adlist));
             ob->d = d;
             ob->link = list[s]->link;
-            list[s]->link = ob->link;
+            list[s]->link = ob;
         }
     } while (a != 2);
     bfs(list, v);
