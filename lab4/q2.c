@@ -75,6 +75,7 @@ void main()
     for (int i = 0; i < v; ++i)
     {
         list[i] = (al)malloc(sizeof(struct adlist));
+        list[i]->vertice = i;
         list[i]->link = NULL;
     }
     int a;
@@ -90,7 +91,7 @@ void main()
             al ob = (al)malloc(sizeof(struct adlist));
             ob->vertice = d;
             ob->link = list[s]->link;
-            list[s]->link = ob->link;
+            list[s]->link = ob;
         }
     } while (a != 2);
     dfs(list, v);
