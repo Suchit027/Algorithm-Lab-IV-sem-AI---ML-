@@ -23,36 +23,48 @@ tl create()
     ob->rchild = create();
     return ob;
 }
-// passing address of int variable which is to be modified
-int diameter(tl root, int *ans)
+int common(tl root, int v1, int v2)
 {
-    static int dia = 0;
     if (!root)
     {
         return 0;
     }
-    int left = diameter(root->lchild, ans);
-    int right = diameter(root->rchild, ans);
-    if (left + right > dia)
+    if (root->val == v1 || root->val == v2)
     {
-        dia = left + right;
+        int a = common(root->lchild, v1, v2);
+        int b = common(root->rchild, v1, v2);
+        if (a == 1 || b == 1){
+            printf("%d", root->val);
+            return -1;
+        }
+        return 1;
     }
-    *ans = dia;
-    if (left >= right)
+    int a = common(root->lchild, v1, v2);
+    int b = common(root->rchild, v1, v2);
+    if (a == 1 && b == 1)
     {
-        return left + 1;
+        printf("%d\n", root->val);
+        return -1;
     }
-    else
+    if (a == 1 || b == 1)
     {
-        return right + 1;
+        return 1;
     }
+    if (a == -1 || b == -1)
+    {
+        return -1;
+    }
+    return 0;
 }
 void main()
 {
     tl root = create();
-    // note this way of passing addresses to the functions
-    int x = 0;
-    int *ans = &x;
-    diameter(root, ans);
-    printf("%d", x);
+    printf("enter val of nodes\n");
+    int v1, v2;
+    scanf("%d %d", &v1, &v2);
+    int a = common(root, v1, v2);
+    if (a == 0)
+    {
+        printf("error");
+    }
 }
