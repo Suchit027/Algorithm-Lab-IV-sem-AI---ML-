@@ -4,19 +4,22 @@ int partition(int *arr, int low, int high)
     int p = arr[low];
     int i = low + 1;
     int j = high;
-    while (i <= j)
+    while (1)
     {
-        while (arr[i] < p)
+        while (arr[i] < p && i < high)
         {
             ++i;
         }
-        while (arr[j] > p)
+        while (arr[j] > p && j > low)
         {
             --j;
         }
         int temp = arr[j];
         arr[j] = arr[i];
         arr[i] = temp;
+        if(i >= j){
+            break;
+        }
     }
     // undoing last swap of i <= j
     int temp = arr[j];
