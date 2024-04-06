@@ -7,17 +7,17 @@ int **knapsack(int **value, int capacity, int weights)
     {
         matrix[i] = (int *)calloc(sizeof(int), (capacity + 1));
     }
-    for (int i = 1; i < capacity + 1; ++i)
+    for (int i = 1; i < weights + 1; ++i)
     {
-        for (int j = 1; j < weights + 1; ++j)
+        for (int j = 1; j < capacity + 1; ++j)
         {
-            if (i - value[j][0] >= 0)
+            if (j - value[i][0] >= 0)
             {
-                matrix[j][i] = value[j][1] + matrix[j - 1][i - value[j][0]] >= matrix[j - 1][i] ? value[j][1] + matrix[j - 1][i - value[j][0]] : matrix[j - 1][i];
+                matrix[i][j] = value[i][1] + matrix[i - 1][j - value[i][0]] >= matrix[i - 1][j] ? value[i][1] + matrix[i - 1][j - value[i][0]] : matrix[i - 1][j];
             }
             else
             {
-                matrix[j][i] = matrix[j - 1][i];
+                matrix[i][j] = matrix[i - 1][j];
             }
         }
     }
